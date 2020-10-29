@@ -13,10 +13,15 @@ It can also be a good fit in case you want to offload WebSocket traffic from you
 
 ### Architecture
 **Paperboy WebSocket server**
+
 Serves WebSocket connections, forward channel subscriptions to backend and dispatch application messages to connected peers.
+
 **Backend connector library**
+
 Your backend needs to include the connector library to be able to talk to Paperboy and to authorize channel subscription requests.
+
 **JavaScript client library**
+
 Should be part of your frontend codebase. See below how to use.
 
 **Redis backend**
