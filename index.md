@@ -12,6 +12,9 @@ Paperboy is a few software components to securely and robustly implement WebSock
 It can also be a good fit in case you want to offload WebSocket traffic from your main backend and scale it independently.
 
 ### Architecture
+
+![Subscription/authorization sequence diagram](/paperboy.png)
+
 **Paperboy WebSocket server**
 
 Serves WebSocket connections, forward channel subscriptions to backend and dispatch application messages to connected peers.
