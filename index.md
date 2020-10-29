@@ -17,12 +17,14 @@ TODO: bird's eye view on components
 
 ### Channels
 TODO:
+publisher is the backend
+subscriber is the frontend
 
 ### Token-based authorization
 In Paperboy a client can only subscribe to a channel with a valid token generated for the requester. The token is obtained from the application backend
 via REST, and on each channel subscription paperboy verifies it. This mechanism is abstracted away as much as possible but the developer still needs to
 configure a REST service on their backend and delegate the request to the paperboy connector for token generation. Important that this REST service on the backend needs to be properly secured, only authorized users should be able to generate tokens!
-TODO: seq diagram of authorization
+![Subscription/authorization sequence diagram](/auth-seq.png)
 
 ### Integrating Paperboy in your stack
 The WebSocket server is a nodejs application, you can deploy standalone or containerized in a kubernetes cluster.
