@@ -32,15 +32,49 @@ configure a REST service on their backend and delegate the request to the paperb
 ![Subscription/authorization sequence diagram](/auth-seq.png)
 
 ### Integrating Paperboy in your stack
+**WebSocket server**
 The WebSocket server is a nodejs application, you can deploy standalone or containerized in a kubernetes cluster.
 
 TODO: examples
 
-TODO: frontend
+**Application frontend**
+Just copy paperboy-client.js under your frontend project, include it in your pages and start using it like below.
 
-Your backend application needs to include a paperboy-connector library to make it able to talk to Paperboy.
+```
+paperboyClient = new PaperboyClient(tokenBaseUrl, wsUrl, channel, function msgHandler(msg) {
+  // TODO: process msg
+});
+paperboyClient.subscribe();
+```
 
-TODO: example with Java
+**Application backend**
+Include a connector library in your backend.
+```
+e.g. Java connector as a gradle dependency
+implementation 'com.paperboy.connector:paperboy-connector-java:1.0-SNAPSHOT'
+```
+
+Setup a connector instance, implement your callbackHandler for authorization.
+```
+e.g. Spring bean of the connector instance
+
+@Bean
+public PaperboyConnector paperboyConnector() {
+    PaperboyConnector connector = new PaperboyConnector(jedisPool, callbackHandler);
+    connector.startListening();
+    return connector;
+}
+```
+
+Expose token generation as a REST endpoint. Path should be secured!
+```
+e.g. Spring REST endpoint for token generation
+
+@GetMapping(path = "/paperboyAuth/{channel}")
+public String requestToken(Principal principal, @PathVariable String channel) {
+  return paperboyConnector.requestToken(principal, channel);
+}
+```
 
 ### Security checklist
 * Paperboy should use WebSocket over SSL: authorization tokens are sent over the WS connection, therefore it's essential to protect that traffic from MITM attacks
