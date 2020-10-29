@@ -9,13 +9,10 @@ Paperboy is a few software components to securely and robustly implement WebSock
 | error handling can be difficult to do right             | heartbeat to detect dead connections, reconnecting clients  |
 | TODO: message validation                                |                                                             |
 
-
-It can also be a good fit in case you want to offload WebSocket traffic from your main backend and scale it independently.
-
 ### Channels
 TODO:
 
-### Architecture
+### Components
 **Paperboy WebSocket server**
 
 Serves WebSocket connections, forward channel subscriptions to backend and dispatches application messages to subscribed clients.
@@ -50,15 +47,26 @@ configure a REST service on their backend and delegate the request to the paperb
 
 The WebSocket server is a nodejs application, you can deploy standalone or containerized in a kubernetes cluster.
 
-See in [repo](https://github.com/gadget/paperboy-node-server)
+```
+docker build -t paperboy/paperboy-node-server .
+docker run --network host paperboy/paperboy-node-server
+```
+
+For more details see in [repo](https://github.com/gadget/paperboy-node-server)
 
 **Application frontend**
 
-See in [repo](https://github.com/gadget/paperboy-client)
+```
+paperboyClient = new PaperboyClient(tokenUrl, wsUrl, channel, function msgHandler(msg) {
+  // TODO: process msg
+});
+paperboyClient.subscribe();
+```
+For more details see in [repo](https://github.com/gadget/paperboy-client)
 
 **Application backend**
 
-For Java: see in [repo](https://github.com/gadget/paperboy-connector-java)
+For Java see in [repo](https://github.com/gadget/paperboy-connector-java)
 
 ### Security checklist
 * Paperboy should use WebSocket over SSL: authorization tokens are sent over the WS connection, therefore it's essential to protect that traffic from MITM attacks

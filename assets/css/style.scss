@@ -4,7 +4,7 @@
 @import "{{ site.theme }}";
 
 .inner {
-    width: 820px;
+    width: 1000px;
 }
 
 img {
@@ -18,11 +18,20 @@ table {
 }
 
 th {
-    font-weight: bold;
-    padding: 4px;
+  color: darkslategrey
+  font-weight: bold;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 1px solid darkslategrey;
 }
 
 td {
     text-align: left;
-    padding: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 1px solid darkslategrey;
 }
