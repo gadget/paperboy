@@ -12,17 +12,22 @@ Paperboy is a few software components to securely and robustly implement WebSock
 It can also be a good fit in case you want to offload WebSocket traffic from your main backend and scale it independently.
 
 ### Architecture
-TODO: bird's eye view on components
+**Paperboy WebSocket server**
+Serves WebSocket connections, forward channel subscriptions to backend and dispatch application messages to connected peers.
+**Backend connector library**
+Your backend needs to include the connector library to be able to talk to Paperboy and to authorize channel subscription requests.
+**JavaScript client library**
+Should be part of your frontend codebase. See below how to use.
+
+**Redis backend**
 
 ### Channels
 TODO:
-publisher is the backend
-subscriber is the frontend
 
 ### Token-based authorization
 In Paperboy a client can only subscribe to a channel with a valid token generated for the requester. The token is obtained from the application backend
 via REST, and on each channel subscription paperboy verifies it. This mechanism is abstracted away as much as possible but the developer still needs to
-configure a REST service on their backend and delegate the request to the paperboy connector for token generation. Important that this REST service on the backend needs to be properly secured, only authorized users should be able to generate tokens!
+configure a REST service on their backend and delegate the request to the paperboy connector for token generation. Important that this REST service on the backend needs to be properly secured!
 
 ![Subscription/authorization sequence diagram](/auth-seq.png)
 
@@ -36,3 +41,8 @@ TODO: frontend
 Your backend application needs to include a paperboy-connector library to make it able to talk to Paperboy.
 
 TODO: example with Java
+
+### Security checklist
+* Paperboy should use WebSocket over SSL: authorization tokens are sent over the WS connection, therefore it's essential to protect that traffic from MITM attacks
+* Authenticate the REST endpoint used for token generation: only logged-in users in your application should be able to generate tokens
+* Let the WebSocket server know which exact origins are allowed, do not use the * wildcard
