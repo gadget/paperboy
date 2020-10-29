@@ -4,7 +4,11 @@
 @import "{{ site.theme }}";
 
 .inner {
-    width: 1000px;
+  width: 1000px;
+}
+
+h2 {
+  color: lightsalmon;
 }
 
 h3 {
@@ -18,8 +22,8 @@ img {
 }
 
 table {
-    background-color: azure;
-    margin-bottom: 15px;
+  background-color: azure;
+  margin-bottom: 15px;
 }
 
 th {
@@ -29,14 +33,22 @@ th {
   padding-bottom: 4px;
   padding-left: 8px;
   padding-right: 8px;
-  border: 1px solid darkslategrey;
+  border: 1px solid darkseagreen;
 }
 
 td {
-    text-align: left;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 8px;
-    padding-right: 8px;
-    border: 1px solid darkslategrey;
+  text-align: left;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 1px solid darkseagreen;
+}
+
+pre code {
+  color: darkgrey;
+}
+
+code, pre {
+  font-family: monospace, revert, system-ui;
 }

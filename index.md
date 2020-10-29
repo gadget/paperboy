@@ -9,7 +9,7 @@ Paperboy is a few software components to securely and robustly implement WebSock
 | TODO: message validation                                |                                                             |
 
 ## Channels
-A traditional publish/subscribe model is implemented, frontend clients can subscribe to channels, application backend can send messages to channels and the messages are dispatched to the subscribed clients. On subscription the backend is called to authorize the request.
+A traditional publish/subscribe model is implemented, frontend clients can subscribe to channels, application backend can send messages to channels and the messages are delivered to the subscribed clients. On subscription the backend is called to authorize the request.
 
 ## Components
 ### Paperboy WebSocket server
@@ -61,7 +61,7 @@ paperboyClient.subscribe();
 For more details see in [repo](https://github.com/gadget/paperboy-client)
 
 ### Application backend
-For Java see in [repo](https://github.com/gadget/paperboy-connector-java)
+For Java connector see in [repo](https://github.com/gadget/paperboy-connector-java)
 
 ### Redis
 If you don't have Redis in your stack yet, you can start a local instance for development.
