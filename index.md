@@ -9,7 +9,7 @@ Paperboy is a few software components to securely and robustly implement WebSock
 | TODO: message validation                                |                                                             |
 
 ## Channels
-TODO:
+A traditional publish/subscribe model is implemented, frontend clients can subscribe to channels, application backend can send messages to channels and the messages are dispatched to the subscribed clients. On subscription the backend is called to authorize the request.
 
 ## Components
 ### Paperboy WebSocket server
@@ -22,7 +22,6 @@ A library for your backend application to include. A connector instance is neede
 A JS client library for your frontend application to be able to subscribe Paperboy channels.
 
 ### Redis backend
-
 Messaging backend of Paperboy. Using the following Redis channels:
 * paperboy-subscription-request
 * paperboy-subscription-authorized
@@ -41,25 +40,35 @@ configure a REST service on their backend and delegate the request to the paperb
 ## Integrating Paperboy in your stack
 ### WebSocket server
 The WebSocket server is a nodejs application, you can deploy standalone or containerized in a kubernetes cluster.
-
 ```
-docker build -t paperboy/paperboy-node-server .
-docker run --network host paperboy/paperboy-node-server
+git clone https://github.com/gadget/paperboy-node-server.git
+cd paperboy-node-server
+npm install
+node paperboy.js
 ```
 
 For more details see in [repo](https://github.com/gadget/paperboy-node-server)
 
 ### Application frontend
+Include the JS library in your frontend code and instantiate a client.
 ```
 paperboyClient = new PaperboyClient(tokenUrl, wsUrl, channel, function msgHandler(msg) {
   // TODO: process msg
 });
 paperboyClient.subscribe();
 ```
+
 For more details see in [repo](https://github.com/gadget/paperboy-client)
 
 ### Application backend
 For Java see in [repo](https://github.com/gadget/paperboy-connector-java)
+
+### Redis
+If you don't have Redis in your stack yet, you can start a local instance for development.
+```
+docker pull redis
+docker run -p 6379:6379 -d redis
+```
 
 ## Security checklist
 * Paperboy should use WebSocket over SSL: authorization tokens are sent over the WS connection, therefore it's essential to protect that traffic from MITM attacks
