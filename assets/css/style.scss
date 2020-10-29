@@ -5,11 +5,24 @@
 
 .inner {
     width: 820px;
-    margin: 0 auto;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table {
+    background-color: azure;
+}
+
+th {
+    font-weight: bold;
+    padding: 4px;
 }
 
 td {
-    font-weight: 300;
     text-align: left;
-    border: 1px solid #ebebeb;
+    padding: 4px;
 }
