@@ -13,8 +13,6 @@ It can also be a good fit in case you want to offload WebSocket traffic from you
 
 ### Architecture
 
-![Subscription/authorization sequence diagram](/paperboy.png)
-
 **Paperboy WebSocket server**
 
 Serves WebSocket connections, forward channel subscriptions to backend and dispatch application messages to connected peers.
@@ -28,6 +26,8 @@ Your backend needs to include the connector library to be able to talk to Paperb
 Should be part of your frontend codebase. See below how to use.
 
 **Redis backend**
+
+![Architecture diagram](/paperboy.png)
 
 ### Channels
 TODO:
