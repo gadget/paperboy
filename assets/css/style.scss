@@ -1,5 +1,15 @@
+---
+---
+
 @import "{{ site.theme }}";
 
+.inner {
+    width: 820px;
+    margin: 0 auto;
+}
+
 td {
-  text-align: left;
+    font-weight: 300;
+    text-align: left;
+    border: 1px solid #ebebeb;
 }
