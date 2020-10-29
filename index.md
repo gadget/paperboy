@@ -33,11 +33,13 @@ configure a REST service on their backend and delegate the request to the paperb
 
 ### Integrating Paperboy in your stack
 **WebSocket server**
+
 The WebSocket server is a nodejs application, you can deploy standalone or containerized in a kubernetes cluster.
 
 TODO: examples
 
 **Application frontend**
+
 Just copy paperboy-client.js under your frontend project, include it in your pages and start using it like below.
 
 ```
@@ -48,13 +50,16 @@ paperboyClient.subscribe();
 ```
 
 **Application backend**
+
 Include a connector library in your backend.
+
 ```
 e.g. Java connector as a gradle dependency
 implementation 'com.paperboy.connector:paperboy-connector-java:1.0-SNAPSHOT'
 ```
 
 Setup a connector instance, implement your callbackHandler for authorization.
+
 ```
 e.g. Spring bean of the connector instance
 
@@ -67,6 +72,7 @@ public PaperboyConnector paperboyConnector() {
 ```
 
 Expose token generation as a REST endpoint. Path should be secured!
+
 ```
 e.g. Spring REST endpoint for token generation
 
