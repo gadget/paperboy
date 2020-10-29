@@ -7,6 +7,14 @@
   width: 1000px;
 }
 
+a {
+  color: darksalmon;
+}
+
+h1 {
+  color: darkslategrey;
+}
+
 h2 {
   color: lightsalmon;
 }
@@ -19,6 +27,7 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid darkseagreen;
 }
 
 table {
@@ -43,6 +52,10 @@ td {
   padding-left: 8px;
   padding-right: 8px;
   border: 1px solid darkseagreen;
+}
+
+pre {
+  padding: 10px;
 }
 
 pre code {
