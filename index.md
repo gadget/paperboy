@@ -8,23 +8,20 @@ Paperboy is a few software components to securely and robustly implement WebSock
 | error handling can be difficult to do right             | heartbeat to detect dead connections, reconnecting clients  |
 | TODO: message validation                                |                                                             |
 
-### Channels
+## Channels
 TODO:
 
-### Components
-**Paperboy WebSocket server**
-
+## Components
+### Paperboy WebSocket server
 Serves WebSocket connections, forward channel subscriptions to backend and dispatches application messages to subscribed clients.
 
-**Backend connector**
-
+### Backend connector
 A library for your backend application to include. A connector instance is needed for your backend to talk to Paperboy and to authorize channel subscription requests.
 
-**JavaScript client**
-
+### JavaScript client
 A JS client library for your frontend application to be able to subscribe Paperboy channels.
 
-**Redis backend**
+### Redis backend
 
 Messaging backend of Paperboy. Using the following Redis channels:
 * paperboy-subscription-request
@@ -34,16 +31,15 @@ Messaging backend of Paperboy. Using the following Redis channels:
 
 ![Architecture diagram](/paperboy.png)
 
-### Token-based authorization
+## Token-based authorization
 In Paperboy a client can only subscribe to a channel with a valid token generated for the requester. The token is obtained from the application backend
 via REST, and on each channel subscription paperboy verifies it. This mechanism is abstracted away as much as possible but the developer still needs to
 configure a REST service on their backend and delegate the request to the paperboy connector for token generation. Important that this REST service on the backend needs to be properly secured!
 
 ![Subscription/authorization sequence diagram](/auth-seq.png)
 
-### Integrating Paperboy in your stack
-**WebSocket server**
-
+## Integrating Paperboy in your stack
+### WebSocket server
 The WebSocket server is a nodejs application, you can deploy standalone or containerized in a kubernetes cluster.
 
 ```
@@ -53,8 +49,7 @@ docker run --network host paperboy/paperboy-node-server
 
 For more details see in [repo](https://github.com/gadget/paperboy-node-server)
 
-**Application frontend**
-
+### Application frontend
 ```
 paperboyClient = new PaperboyClient(tokenUrl, wsUrl, channel, function msgHandler(msg) {
   // TODO: process msg
@@ -63,14 +58,13 @@ paperboyClient.subscribe();
 ```
 For more details see in [repo](https://github.com/gadget/paperboy-client)
 
-**Application backend**
-
+### Application backend
 For Java see in [repo](https://github.com/gadget/paperboy-connector-java)
 
-### Security checklist
+## Security checklist
 * Paperboy should use WebSocket over SSL: authorization tokens are sent over the WS connection, therefore it's essential to protect that traffic from MITM attacks
 * Authenticate the REST endpoint used for token generation: only logged-in users in your application should be able to generate tokens
 * Let the WebSocket server know which exact origins are allowed, do not use the * wildcard
 
-### Examples
+## Examples
 * [Simple chat application](https://github.com/gadget/paperboy-example-chat)
