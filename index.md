@@ -1,5 +1,5 @@
 ## Welcome to Paperboy
-Paperboy is a few software components to securely and robustly implement WebSockets in your application. WebSocket is a powerful technology but has some weaknesses and still poorly understood. The goal is to hide the complexity of authorization from the developer and leave no room for mistake.
+Paperboy is a few software components to securely and robustly implement WebSockets in your application. WebSocket is a powerful technology but has some weaknesses and still poorly understood.
 
 | issues with WebSockets                                  | our way                                                     |
 |---------------------------------------------------------|-------------------------------------------------------------|
