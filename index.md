@@ -1,5 +1,3 @@
-# Paperboy for WebSockets
-
 ## Welcome to Paperboy
 Paperboy is a few software components to securely and robustly implement WebSockets in your application. WebSocket is a powerful technology but has some weaknesses and still poorly understood.
 
