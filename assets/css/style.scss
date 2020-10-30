@@ -11,6 +11,10 @@ a {
   color: darksalmon;
 }
 
+header h1 {
+  color: darkslategrey;
+}
+
 h1 {
   color: darkslategrey;
 }
@@ -64,4 +68,8 @@ pre code {
 
 code, pre {
   font-family: "monospace", "revert", "system-ui";
+}
+
+ul li {
+  padding-left: 5px;
 }
