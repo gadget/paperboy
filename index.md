@@ -38,11 +38,11 @@ configure a REST service on their backend and delegate the request to the paperb
 ![Subscription/authorization sequence diagram](/auth-seq.png)
 
 ### What happens when a frontend client subscribes to a Paperboy channel?
-1. Paperboy frontend client calls the backend via REST requesting a token for the channel
-2. Backend authenticates the call and generates a new valid token encapsulating the authenticated user and the requested channel as token claims
-3. Paperboy frontend client opens the WebSocket connection and sends the token over to the WebSocket server
+1. frontend client calls the backend via REST requesting a token for the channel
+2. backend authenticates the call and generates a new valid token encapsulating the authenticated user and the requested channel as token claims
+3. frontend client opens the WebSocket connection and sends the token over to the WebSocket server
 4. WebSocket server publishes a Redis message of the user's channel subscription request
-5. Backend receives the subscription request from Redis, verifies the token and publishes a subscription authorized message on Redis
+5. backend receives the subscription request from Redis, verifies the token and publishes a subscription authorized message on Redis
 6. WebSocket server receives this authorized message, flags the subscription as authorized and starts dispatching channel messages to the client
 
 ## Integrating Paperboy in your stack
