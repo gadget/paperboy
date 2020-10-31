@@ -21,8 +21,13 @@ A library for your backend application to include. A connector instance is neede
 ### JavaScript client
 A JS client library for your frontend application to be able to subscribe Paperboy channels.
 
-### Redis backend
-Messaging backend of Paperboy. Using the following Redis channels:
+### Messaging backend
+Paperboy supports a few messaging backends, pick the one you already have in your stack:
+* Redis
+* RabbitMQ
+* Google Pub/Sub
+
+The following topics are used internally by Paperboy on every backend:
 * paperboy-subscription-request
 * paperboy-subscription-authorized
 * paperboy-subscription-close
@@ -71,8 +76,8 @@ For more details see in [repo](https://github.com/gadget/paperboy-client)
 ### Application backend
 For Java connector see in [repo](https://github.com/gadget/paperboy-connector-java)
 
-### Redis
-If you don't have Redis in your stack yet, you can start a local instance for development.
+### Messaging backend
+If you don't have any of the supported systems in your stack yet, try using Redis. You can start a local instance for development:
 ```
 docker pull redis
 docker run -p 6379:6379 -d redis
