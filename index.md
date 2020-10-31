@@ -65,10 +65,10 @@ For more details see in [repo](https://github.com/gadget/paperboy-node-server)
 ### Application frontend
 Include the JS library in your frontend code and instantiate a client.
 ```
-paperboyClient = new PaperboyClient(tokenUrl, wsUrl, channel, function msgHandler(msg) {
+var paperboyClient = new PaperboyClient(tokenUrl, wsUrl);
+paperboyClient.subscribe(channel, function msgHandler(msg) {
   // TODO: process msg
 });
-paperboyClient.subscribe();
 ```
 
 For more details see in [repo](https://github.com/gadget/paperboy-client)
