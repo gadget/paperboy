@@ -12,6 +12,8 @@ Paperboy is a few software components to securely and robustly implement WebSock
 A traditional publish/subscribe model is implemented, frontend clients can subscribe to channels, application backend can send messages to channels and the messages are delivered to the subscribed clients. On subscription the backend is called to authorize the request.
 
 ## Components
+![Architecture diagram](/paperboy.png)
+
 ### Paperboy WebSocket server
 Serves WebSocket connections, forward channel subscriptions to backend and dispatches application messages to subscribed clients.
 
@@ -25,15 +27,15 @@ A JS client library for your frontend application to be able to subscribe Paperb
 Paperboy supports a few messaging backends, pick the one you already have in your stack:
 * Redis
 * RabbitMQ
+* Kafka
 * Google Pub/Sub
+* Amazon SNS
 
 The following topics are used internally by Paperboy on every backend:
 * paperboy-subscription-request
 * paperboy-subscription-authorized
 * paperboy-subscription-close
 * paperboy-message
-
-![Architecture diagram](/paperboy.png)
 
 ## Token-based authorization
 In Paperboy a client can only subscribe to a channel with a valid token generated for the requester. The token is obtained from the application backend
@@ -74,6 +76,26 @@ paperboyClient.subscribe(channel, function msgHandler(msg) {
 For more details see in [repo](https://github.com/gadget/paperboy-client)
 
 ### Application backend
+Include the connector library in your backend code and configure it.
+e.g. Java connector backed with Redis in a Spring boot application
+```
+@Bean
+public JedisPool jedisPool() {
+    return new JedisPool(new JedisPoolConfig(), "localhost");
+}
+
+@Bean
+public PaperboyCallbackHandler paperboyCallbackHandler() {
+    return new ChatAppCallbackHandler();
+}
+
+@Bean
+public PaperboyConnector paperboyConnector() {
+    PaperboyConnector connector = new PaperboyConnector(new RedisBackend(jedisPool), callbackHandler);
+    connector.init();
+    return connector;
+}
+```
 For Java connector see in [repo](https://github.com/gadget/paperboy-connector-java)
 
 ### Messaging backend
@@ -82,6 +104,9 @@ If you don't have any of the supported systems in your stack yet, try using Redi
 docker pull redis
 docker run -p 6379:6379 -d redis
 ```
+
+## Scaling
+TODO: diagram with multiple server nodes, channel partitioning
 
 ## Security checklist
 * Paperboy should use WebSocket over SSL: authorization tokens are sent over the WS connection, therefore it's essential to protect that traffic from MITM attacks
