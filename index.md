@@ -24,13 +24,12 @@ A library for your backend application to include. A connector instance is neede
 A JS client library for your frontend application to be able to subscribe Paperboy channels.
 
 ### Messaging backend
-// TODO: only Redis support is fully available as of now
 Paperboy supports a few messaging backends, pick the one you already have in your stack:
 * Redis
 * RabbitMQ
-* Kafka
-* Google Pub/Sub
-* Amazon SNS
+* not yet -- Kafka
+* not yet --Google Pub/Sub
+* not yet --Amazon SNS
 
 The following topics are used internally by Paperboy on every backend:
 * paperboy-subscription-request
