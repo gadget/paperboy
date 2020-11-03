@@ -6,7 +6,6 @@ Paperboy is a few software components to securely and robustly implement WebSock
 | no enforcement of Same Origin Policy                    | configurable allowed origins, validating on new connections |
 | low level message handling                              | publish/subscribe model, notion of channels                 |
 | error handling can be difficult to do right             | heartbeat to detect dead connections, reconnecting clients  |
-| TODO: message validation                                |                                                             |
 
 ## Channels
 A traditional publish/subscribe model is implemented, frontend clients can subscribe to channels, application backend can send messages to channels and the messages are delivered to the subscribed clients. On subscription the backend is called to authorize the request.
@@ -24,18 +23,10 @@ A library for your backend application to include. A connector instance is neede
 A JS client library for your frontend application to be able to subscribe Paperboy channels.
 
 ### Messaging backend
-Paperboy supports a few messaging backends, pick the one you already have in your stack:
+Paperboy needs an actual messaging system to deliver it's internal and application messages. Important to note that channels/topics of the underlying messaging backend are not the same thing like application level Paperboy channels. The latter is just a 'virtual' abstraction and messages on every Paperboy channel are delivered through a single channel/topic in the underlying messaging backend.
+Supported backends:
 * Redis
 * RabbitMQ
-* not yet -- Kafka
-* not yet --Google Pub/Sub
-* not yet --Amazon SNS
-
-The following topics are used internally by Paperboy on every backend:
-* paperboy-subscription-request
-* paperboy-subscription-authorized
-* paperboy-subscription-close
-* paperboy-message
 
 ## Token-based authorization
 In Paperboy a client can only subscribe to a channel with a valid token generated for the requester. The token is obtained from the application backend
@@ -106,7 +97,6 @@ docker run -p 6379:6379 -d redis
 ```
 
 ## Scaling
-TODO: diagram with multiple server nodes, channel partitioning
 
 ## Security checklist
 * Paperboy should use WebSocket over SSL: authorization tokens are sent over the WS connection, therefore it's essential to protect that traffic from MITM attacks
