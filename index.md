@@ -43,6 +43,8 @@ configure a REST service on their backend and delegate the request to the paperb
 5. backend receives the subscription request from Redis, verifies the token and publishes a subscription authorized message on Redis
 6. WebSocket server receives this authorized message, flags the subscription as authorized and starts dispatching channel messages to the client
 
+The client re-uses the WebSocket connection, all the channel subscriptions and messages are transferred on a single connection.
+
 ## Integrating Paperboy in your stack
 ### WebSocket server
 The WebSocket server is a nodejs application, you can deploy standalone or containerized in a kubernetes cluster.
