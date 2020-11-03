@@ -11,7 +11,7 @@ Paperboy is a few software components to securely and robustly implement WebSock
 A traditional publish/subscribe model is implemented, frontend clients can subscribe to channels, application backend can send messages to channels and the messages are delivered to the subscribed clients. On subscription the backend is called to authorize the request.
 
 ## Components
-![Architecture diagram](/paperboy.png)
+![Architecture diagram](/paperboy.svg)
 
 ### Paperboy WebSocket server
 Serves WebSocket connections, forward channel subscriptions to backend and dispatches application messages to subscribed clients.
@@ -33,7 +33,7 @@ In Paperboy a client can only subscribe to a channel with a valid token generate
 via REST, and on each channel subscription paperboy verifies it. This mechanism is abstracted away as much as possible but the developer still needs to
 configure a REST service on their backend and delegate the request to the paperboy connector for token generation. Important that this REST service on the backend needs to be properly secured!
 
-![Subscription/authorization sequence diagram](/auth-seq.png)
+![Subscription/authorization sequence diagram](/auth-seq.svg)
 
 ### What happens when a frontend client subscribes to a Paperboy channel?
 1. frontend client calls the backend via REST requesting a token for the channel
