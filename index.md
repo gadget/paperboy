@@ -99,7 +99,7 @@ docker run -p 6379:6379 -d redis
 ```
 
 ## Scaling
-The WebSocket server can scale horizontally, you can add new servers/containers in your infrastructure, just put them behind a load balancer and no additional configuration is needed. Instances do not share states, they only deal with states related to their own client connections. All messages on a channel are always delivered to every WebSocket server and then based on it's internal states each server dispatch the messages to their clients who has previously subscribed to the channel.
+The WebSocket server can scale horizontally, you can add new servers/containers in your infrastructure, just put them behind a load balancer and no additional configuration is needed. Instances do not share states, they only deal with states related to their own client connections. All messages on a channel are always delivered to every WebSocket server and then each server dispatch the messages to their clients who has previously subscribed to the channel.
 
 ## Security checklist
 * Paperboy should use WebSocket over SSL: authorization tokens are sent over the WS connection, therefore it's essential to protect that traffic from MITM attacks
